@@ -1,0 +1,44 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: query-frontend
+  labels:
+    app: loki
+  annotations:
+    prometheus.io/port: http
+    prometheus.io/scrape: "true"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      name: query-frontend
+  template:
+    metadata:
+      labels:
+        name: query-frontend
+        app: loki
+    spec:
+      serviceAccountName: loki
+      securityContext:
+        fsGroup: 10001
+        runAsGroup: 10001
+        runAsNonRoot: true
+        runAsUser: 10001
+      containers:
+      - name: query-frontend
+        image: grafana/loki:1.4.0
+        imagePullPolicy: Always
+        args:
+        - -target=query-frontend
+        - -log.level=debug
+        - -server.http-listen-port=8080
+        - -server.grpc-listen-port=9095
+        ports:
+        - containerPort: 9095
+          name: grpc
+        - containerPort: 8080
+          name: http
+        securityContext:
+          readOnlyRootFilesystem: true
+      terminationGracePeriodSeconds: 4800

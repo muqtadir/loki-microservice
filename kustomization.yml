@@ -1,0 +1,15 @@
+resources:
+- loki-rbac.yml
+- s3-dep.yml
+- s3-svc.yml
+- schema-config.yml
+- table-manager-dep.yml
+- table-manager-svc.yml
+- ingester-svc.yml
+- ingester-dep.yml
+- distributor-svc.yml
+- distributor-dep.yml
+- query-frontend-dep.yml
+- query-frontend-svc.yml
+- querier-dep.yml
+- querier-svc.yml
