@@ -1,0 +1,26 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: s3
+  labels:
+    app: loki
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: s3
+  template:
+    metadata:
+      labels:
+        name: s3
+        app: loki
+      annotations:
+        prometheus.io.scrape: "false"
+    spec:
+      containers:
+      - name: s3
+        image: lphoward/fake-s3
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 4569

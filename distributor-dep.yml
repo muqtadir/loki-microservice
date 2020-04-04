@@ -1,0 +1,58 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: distributor
+  labels:
+    app: loki
+  annotations:
+    prometheus.io/port: http-metrics
+    prometheus.io/scrape: "true"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      name: distributor
+  template:
+    metadata:
+      labels:
+        name: distributor
+        app: loki
+    spec:
+      # Give ingesters 40 minutes grace to flush chunks and exit cleanly.
+      # Service is available during this time, as long as we don't stop
+      # too many ingesters at once.
+      terminationGracePeriodSeconds: 2400
+
+      serviceAccountName: loki
+      securityContext:
+        fsGroup: 10001
+        runAsGroup: 10001
+        runAsNonRoot: true
+        runAsUser: 10001
+      containers:
+      - name: distributor
+        image: grafana/loki:1.4.0
+        imagePullPolicy: Always
+        args:
+        - -target=distributor
+        - -log.level=debug
+        - -server.http-listen-port=8080
+        - -consul.hostname=consul.default.svc.cluster.local:8500
+        - -distributor.replication-factor=3
+        ports:
+        - name: http-metrics
+          containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: http-metrics
+          initialDelaySeconds: 45
+          timeoutSeconds: 1
+        livenessProbe:
+          httpGet:
+            path: /ready
+            port: http-metrics
+          initialDelaySeconds: 45
+        securityContext:
+          readOnlyRootFilesystem: true
