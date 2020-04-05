@@ -7,12 +7,13 @@ metadata:
     app: loki
 spec:
   # clusterIP: None gives a "headless" service so DNS returns all endpoints.
-  clusterIP: None
+  clusterIP: ClusterIP
   ports:
     - port: 9095
       name: grcp
-    - port: 80
+    - port: 3100
       name: http
-      targetPort: 8080
+      targetPort: 3100
   selector:
     name: query-frontend
+    sessionAffinity: None
