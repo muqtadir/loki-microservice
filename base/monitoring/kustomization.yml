@@ -1,3 +1,4 @@
 resources:
 - ./loki
 - ./logging-operator
+- ./consul

@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: loki
+  namespace: argocd
+  labels:
+    scope: system
+spec:
+  destination:
+    namespace: monitoring
+    server: 'https://kubernetes.default.svc'
+  source:
+    repoURL: 'https://charts.bitnami.com/bitnami'
+    targetRevision: 7.0.8
+    chart: consul
+    helm:
+      parameters: []
+  project: monitoring
+  syncPolicy:
+    automated: {}  
