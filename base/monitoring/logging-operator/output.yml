@@ -4,7 +4,7 @@ metadata:
   name: loki-output
 spec:
   loki:
-    url: http://distributor.default.svc.cluster.local
+    url: http://distributor
     configure_kubernetes_labels: true
     buffer:
       flush_mode: interval

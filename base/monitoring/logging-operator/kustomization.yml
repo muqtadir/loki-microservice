@@ -2,3 +2,7 @@ resources:
 - prom-op-rbac-helper.yaml
 - logging-operator.yml
 - prometheus-operator.yml
+# logging operator default config, works good at least for inventory and promise-date
+- flow.yml
+- output.yml
+- logging.yml
