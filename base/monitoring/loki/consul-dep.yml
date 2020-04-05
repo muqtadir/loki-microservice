@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: consul
-        image: consul:0.7.1
+        image: bitnami/consul:7.0.8
         imagePullPolicy: IfNotPresent
         args:
         - agent
