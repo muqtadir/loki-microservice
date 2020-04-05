@@ -11,6 +11,7 @@ resources:
 - ingester-dep.yml
 - distributor-svc.yml
 - distributor-dep.yml
+- query-frontend-config.yml
 - query-frontend-dep.yml
 - query-frontend-svc.yml
 - querier-dep.yml
