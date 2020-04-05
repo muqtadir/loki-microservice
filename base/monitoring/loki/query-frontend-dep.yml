@@ -31,6 +31,8 @@ spec:
         imagePullPolicy: Always
         args:
         - -config.file=/etc/loki/config.yaml
+        - -server.http-listen-port=80
+        - -server.grpc-listen-port=9095
         - -target=query-frontend
         - -log.level=debug
         volumeMounts:
@@ -39,7 +41,7 @@ spec:
         ports:
         - containerPort: 9095
           name: grpc
-        - containerPort: 3100
+        - containerPort: 80
           name: http-metrics
         resources:
           limits:
