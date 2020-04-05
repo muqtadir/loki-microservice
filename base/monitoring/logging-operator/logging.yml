@@ -3,11 +3,11 @@ kind: Logging
 metadata:
   name: default-logging
 spec:
-  fluentd: 
+  fluentd:
     scaling:
-      replicas: 3
+      replicas: 1
     resources:
-      limits: 
+      limits:
         cpu: "2"
         memory: 1024M
       requests:
