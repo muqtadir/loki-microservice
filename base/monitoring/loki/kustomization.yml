@@ -2,6 +2,8 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
 - loki-rbac.yml
+- consul-dep.yml
+- consul-svc.yml
 - s3-dep.yml
 - s3-svc.yml
 - schema-config.yml
