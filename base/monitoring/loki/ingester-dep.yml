@@ -56,8 +56,8 @@ spec:
         - -target=ingester
         - -ingester.join-after=30s
         - -server.http-listen-port=8080
-        - -consul.hostname=consul.default.svc.cluster.local:8500
-        - -s3.url=s3://abc:123@s3.default.svc.cluster.local:4569
+        - -consul.hostname=consul:8500
+        - -s3.url=s3://abc:123@s3:4569
         - -config.file=/etc/loki/loki.yaml
         ports:
         - name: http-metrics
