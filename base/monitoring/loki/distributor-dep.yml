@@ -37,6 +37,7 @@ spec:
         args:
         - -target=distributor
         - -log.level=debug
+        - -auth_enabled=false
         - -server.http-listen-port=8080
         - -consul.hostname=loki-consul:8500
         - -distributor.replication-factor=3
