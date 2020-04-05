@@ -30,16 +30,40 @@ spec:
         image: grafana/loki:1.4.0
         imagePullPolicy: Always
         args:
+        - -config.file=/etc/loki/config.yaml
         - -target=query-frontend
         - -log.level=debug
-        - -consul.hostname=loki-consul:8500
-        - -server.http-listen-port=8080
-        - -server.grpc-listen-port=9095
         ports:
         - containerPort: 9095
           name: grpc
         - containerPort: 8080
           name: http
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: http-metrics
+          initialDelaySeconds: 15
+          timeoutSeconds: 1
+        livenessProbe:
+          httpGet:
+            path: /ready
+            port: http-metrics
+          initialDelaySeconds: 15
+        resources:
+          limits:
+            memory: 1200Mi
+          requests:
+            cpu: "2"
+            memory: 600Mi
+          volumeMounts:
+        - mountPath: /etc/loki
+          name: query-frontend
         securityContext:
           readOnlyRootFilesystem: true
-      terminationGracePeriodSeconds: 4800
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 10
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: query-frontend
+        name: query-frontend
