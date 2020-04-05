@@ -8,7 +8,7 @@ metadata:
     app: loki
 spec:
   # clusterIP: None gives a "headless" service so DNS returns all endpoints.
-  type: ClusterIP
+  clusterIP: None
   ports:
     - port: 9095
       name: grcp
