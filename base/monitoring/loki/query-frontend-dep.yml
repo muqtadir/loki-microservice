@@ -50,6 +50,7 @@ spec:
         securityContext:
           readOnlyRootFilesystem: true
       restartPolicy: Always
+      erminationGracePeriodSeconds: 30
       volumes:
         - name: query-frontend
           configMap:
