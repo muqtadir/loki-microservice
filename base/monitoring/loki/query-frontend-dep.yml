@@ -39,7 +39,7 @@ spec:
         ports:
         - containerPort: 9095
           name: grpc
-        - containerPort: 8080
+        - containerPort: 3100
           name: http
         readinessProbe:
           httpGet:
