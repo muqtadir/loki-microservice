@@ -26,7 +26,7 @@ spec:
         runAsNonRoot: true
         runAsUser: 10001
       containers:
-      - name: query-frontend
+        name: query-frontend
         image: grafana/loki:1.4.0
         imagePullPolicy: Always
         args:
@@ -56,8 +56,8 @@ spec:
             cpu: "2"
             memory: 600Mi
           volumeMounts:
-        - mountPath: /etc/loki
-          name: query-frontend
+          - mountPath: /etc/loki
+            name: query-frontend
         securityContext:
           readOnlyRootFilesystem: true
       restartPolicy: Always
