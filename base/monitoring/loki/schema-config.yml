@@ -7,6 +7,39 @@ metadata:
 data:
   loki.yaml: |
     auth_enabled: false
+    distributor_config
+      ring:
+        kvstore:
+          store: consul
+          prefix: collectors/
+          consul:
+            host: http://loki-consul:8500
+            acltoken: 00000000-0000-0000-0000-000000000002
+            httpclienttimeout: 20s
+            consistentreads: true
+        replication_factor: 3
+    ingester:
+      # The compression algorithm to use for chunks. (supported: gzip, lz4, snappy)
+      # You should choose your algorithm depending on your need:
+      # - `gzip` highest compression ratio but also slowest decompression speed. (144 kB per chunk)
+      # - `lz4` fastest compression speed (188 kB per chunk)
+      # - `snappy` fast and popular compression algorithm (272 kB per chunk)
+      chunk_encoding: gzip
+      chunk_block_size: 262144
+      chunk_idle_period: 30m
+      chunk_retain_period: 10m
+      max_transfer_retries: 10
+      lifecycler:
+        ring:
+          kvstore:
+            store: consul
+            prefix: collectors/
+            consul:
+              host: http://loki-consul:8500
+              acltoken: 00000000-0000-0000-0000-000000000002
+              httpclienttimeout: 20s
+              consistentreads: true
+          replication_factor: 3
     schema_config:
       configs:
       - from: "2020-02-15"
