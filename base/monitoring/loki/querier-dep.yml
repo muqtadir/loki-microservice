@@ -9,7 +9,7 @@ metadata:
     prometheus.io/port: http-metrics
     prometheus.io/scrape: "true"
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       name: querier
@@ -35,7 +35,7 @@ spec:
         - -consul.hostname=loki-consul:8500
         - -s3.url=s3://abc:123@s3:4569
         - -config.file=/etc/loki/loki.yaml
-        - -querier.frontend-address=query-frontend:9095
+        - -querier.frontend-address=query-frontend.monitoring.svc.cluster.local:9095
         - -distributor.replication-factor=3
         volumeMounts:
           - name: config-volume
