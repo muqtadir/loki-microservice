@@ -56,14 +56,14 @@ spec:
             cpu: "2"
             memory: 600Mi
           volumeMounts:
-          - mountPath: /etc/loki
-            name: query-frontend
+            - mountPath: /etc/loki
+              name: query-frontend
         securityContext:
           readOnlyRootFilesystem: true
       restartPolicy: Always
       terminationGracePeriodSeconds: 10
       volumes:
-      - configMap:
-          defaultMode: 420
-          name: query-frontend
-        name: query-frontend
+        - name: query-frontend
+          configMap:
+            defaultMode: 420
+            name: query-frontend
