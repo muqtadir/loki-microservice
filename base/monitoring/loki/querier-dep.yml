@@ -32,7 +32,7 @@ spec:
         args:
         - -target=querier
         - -server.http-listen-port=8080
-        - -consul.hostname=consul:8500
+        - -consul.hostname=loki-consul:8500
         - -s3.url=s3://abc:123@s3:4569
         - -config.file=/etc/loki/loki.yaml
         - -querier.frontend-address=query-frontend:9095
