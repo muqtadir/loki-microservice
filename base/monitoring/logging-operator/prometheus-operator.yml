@@ -47,6 +47,8 @@ spec:
           value: "false"
         - name: "prometheusOperator.admissionWebhooks.patch.image.tag"
           value: "v1.2.0"
+        - name: "exporter-kubelets.https"
+          value: "false"
   project: monitoring
   syncPolicy:
     automated: {}
