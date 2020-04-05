@@ -45,13 +45,13 @@ spec:
           httpGet:
             path: /ready
             port: http-metrics
-          initialDelaySeconds: 2
+          initialDelaySeconds: 45
           timeoutSeconds: 1
         livenessProbe:
           httpGet:
             path: /ready
             port: http-metrics
-          initialDelaySeconds: 2
+          initialDelaySeconds: 45
         resources:
           limits:
             memory: 1200Mi
@@ -61,7 +61,7 @@ spec:
         securityContext:
           readOnlyRootFilesystem: true
       restartPolicy: Always
-      terminationGracePeriodSeconds: 5
+      terminationGracePeriodSeconds: 50
       volumes:
         - name: query-frontend
           configMap:
