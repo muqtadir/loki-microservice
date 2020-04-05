@@ -2,7 +2,8 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: query-frontend
-  app: loki
+  labels:
+    app: loki
 data:
   config.yaml: |
     # Disable the requirement that every request to Cortex has a
