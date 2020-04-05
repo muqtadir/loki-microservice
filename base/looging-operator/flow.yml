@@ -1,0 +1,26 @@
+apiVersion: logging.banzaicloud.io/v1beta1
+kind: ClusterFlow
+metadata:
+  name: loki-flow
+spec:
+  filters: []
+  # - record_transformer: 
+  #     remove_keys: log
+  selectors:
+    logging-flow: default
+  outputRefs:
+    - loki-output
+  # loggingRef: default-logging
+
+---
+apiVersion: logging.banzaicloud.io/v1beta1
+kind: ClusterFlow
+metadata:
+  name: nginx-flow
+spec:
+  filters: []
+  selectors:
+    app: nginx-ingress
+  outputRefs:
+    - loki-output
+  # loggingRef: default-logging

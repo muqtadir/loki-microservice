@@ -1,0 +1,15 @@
+apiVersion: logging.banzaicloud.io/v1beta1
+kind: ClusterOutput
+metadata:
+  name: loki-output
+spec:
+  loki:
+    url: http://distributor.default.svc.cluster.local
+    configure_kubernetes_labels: true
+    buffer:
+      flush_mode: interval
+      flush_interval: 1s
+      chunk_limit_size: 8MB
+      overflow_action: drop_oldest_chunk
+      retry_forever: false
+  # loggingRef: default-logging

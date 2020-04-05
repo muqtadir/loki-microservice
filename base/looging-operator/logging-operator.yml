@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: logging-operator
+  namespace: argocd
+  labels:
+    scope: system
+spec:
+  destination:
+    namespace: monitoring
+    server: 'https://kubernetes.default.svc'
+  source:
+    repoURL: 'https://kubernetes-charts.banzaicloud.com'
+    targetRevision: 2.7.1
+    chart: logging-operator
+    helm:
+      parameters: []
+
+  project: monitoring
+  syncPolicy:
+    automated: {}
