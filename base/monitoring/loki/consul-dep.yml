@@ -3,6 +3,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: consul
+  labels:
+    app: loki
 spec:
   replicas: 3
   selector:

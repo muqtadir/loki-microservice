@@ -1,0 +1,5 @@
+resources:
+- prom-op-rbac-helper.yaml
+- grafana-svc.yml
+- logging-operator.yml
+- prometheus-operator.yml
