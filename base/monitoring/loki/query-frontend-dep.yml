@@ -26,13 +26,16 @@ spec:
         runAsNonRoot: true
         runAsUser: 10001
       containers:
-        name: query-frontend
+      - name: query-frontend
         image: grafana/loki:1.4.0
         imagePullPolicy: Always
         args:
         - -config.file=/etc/loki/config.yaml
         - -target=query-frontend
         - -log.level=debug
+        volumeMounts:
+          - name: query-frontend
+            mountPath: /etc/loki
         ports:
         - containerPort: 9095
           name: grpc
