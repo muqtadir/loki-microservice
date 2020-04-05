@@ -6,7 +6,7 @@ metadata:
   labels:
     app: loki
   annotations:
-    prometheus.io/port: http
+    prometheus.io/port: http-metrics
     prometheus.io/scrape: "true"
 spec:
   replicas: 3
@@ -40,7 +40,7 @@ spec:
         - containerPort: 9095
           name: grpc
         - containerPort: 3100
-          name: http
+          name: http-metrics
         readinessProbe:
           httpGet:
             path: /ready
