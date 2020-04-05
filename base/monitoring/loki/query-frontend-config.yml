@@ -11,7 +11,7 @@ data:
     auth_enabled: false
 
     # We don't want the usual /api/prom prefix.
-    #http_prefix:
+    http_prefix:
 
     server:
       http_listen_port: 3100
