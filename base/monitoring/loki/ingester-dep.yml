@@ -9,7 +9,7 @@ metadata:
     prometheus.io/port: http-metrics
     prometheus.io/scrape: "true"
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       name: ingester

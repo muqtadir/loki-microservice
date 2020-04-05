@@ -4,6 +4,7 @@ kind: Service
 metadata:
   name: query-frontend
   labels:
+    name: query-frontend
     app: loki
 spec:
   # clusterIP: None gives a "headless" service so DNS returns all endpoints.
@@ -12,8 +13,8 @@ spec:
     - port: 9095
       name: grcp
     - port: 3100
-      name: http
+      name: query-frontend-http
+      protocol: TCP
       targetPort: 3100
   selector:
     name: query-frontend
-    sessionAffinity: None
