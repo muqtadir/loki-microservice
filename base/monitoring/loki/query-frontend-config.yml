@@ -14,7 +14,7 @@ data:
     http_prefix:
 
     server:
-      http_listen_port: 80
+      http_listen_port: 3100
 
     query_range:
       # make queries more cache-able by aligning them with their step intervals
