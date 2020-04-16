@@ -16,9 +16,11 @@ spec:
     helm:
       parameters:
         - name: accessKey
-          value: 'azurestorageaccountname'
-        - name: accessKey
-          value: 'azurestorageaccountname'
+          value: ${AZURE_REQUESTOR_ACCOUNT_ACCESS_KEY}
+        - name: secretKey
+          value: ${AZURE_REQUESTOR_ACCOUNT_SECRETE_KEY}
+      secrets:
+        - name: secret-minio
   project: monitoring
   syncPolicy:
     automated: {}
