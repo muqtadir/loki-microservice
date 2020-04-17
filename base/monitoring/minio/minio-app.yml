@@ -19,6 +19,6 @@ spec:
           value: 'AZURE_REQUESTOR_ACCOUNT_ACCESS_KEY'
         - name: secretKey
           value: 'AZURE_REQUESTOR_ACCOUNT_SECRETE_KEY'
-  project: monitoring
+  project: default
   syncPolicy:
     automated: {}
