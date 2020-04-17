@@ -10,7 +10,7 @@ spec:
     namespace: monitoring
     server: 'https://kubernetes.default.svc'
   source:
-    repoURL: 'https://hub.helm.sh/'
+    repoURL: 'https://marketplace.azurecr.io/helm/v1/repo'
     targetRevision: 5.0.21
     chart: minio
     helm:
