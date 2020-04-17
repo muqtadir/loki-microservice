@@ -21,6 +21,6 @@ spec:
           value: ${AZURE_REQUESTOR_ACCOUNT_SECRETE_KEY}
       secrets:
         - name: secret-minio
-  project: monitoring
+  project: default
   syncPolicy:
     automated: {}
