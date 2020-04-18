@@ -8,19 +8,13 @@ metadata:
   labels:
     scope: system
 spec:
+  dependencies:
+  - name: minio
+    version: 5.0.21
+    repository: https://kubernetes-charts.storage.googleapis.com
   destination:
     namespace: monitoring
     server: 'https://kubernetes.default.svc'
-  source:
-    repoURL: 'https://kubernetes-charts.storage.googleapis.com/'
-    targetRevision: 5.0.21
-    chart: minio
-    helm:
-      releaseName: minio
-      valueFiles:
-#        - https://github.com/muqtadir/loki-microservice/blob/master/base/monitoring/minio/values.yml
-        - https://github.com/muqtadir/loki-microservice/blob/master/base/monitoring/minio/values-production.yml
-#        - https://github.com/muqtadir/loki-microservice/blob/master/base/monitoring/minio/values-performance.yml
   project: monitoring
   syncPolicy:
     automated: {}
