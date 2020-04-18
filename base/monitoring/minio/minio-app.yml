@@ -1,8 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: loki
+  name: loki-minio
   namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
   labels:
     scope: system
 spec:
@@ -14,13 +16,11 @@ spec:
     targetRevision: 5.0.21
     chart: minio
     helm:
-      parameters:
-        - name: accessKey
-          value: ${AZURE_REQUESTOR_ACCOUNT_ACCESS_KEY}
-        - name: secretKey
-          value: ${AZURE_REQUESTOR_ACCOUNT_SECRETE_KEY}
-      secrets:
-        - name: secret-minio
-  project: default
+      releaseName: minio
+      valueFiles:
+        - values.yml
+        - values-production.yml
+        - values-performance.yml
+  project: monitoring
   syncPolicy:
     automated: {}

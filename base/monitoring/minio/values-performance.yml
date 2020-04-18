@@ -1,0 +1,8 @@
+accessKey: "AKIAIOSFODNN7EXAMPLE"
+secretKey: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
+azuregateway:
+  enabled: false
+  # Number of parallel instances
+  replicas: 4
+s3gateway:
+  enabled: false  
