@@ -18,9 +18,9 @@ spec:
     helm:
       releaseName: minio
       valueFiles:
-        - values.yml
-        - values-production.yml
-        - values-performance.yml
+        - https://github.com/muqtadir/loki-microservice/blob/master/base/monitoring/minio/values.yml
+        - https://github.com/muqtadir/loki-microservice/blob/master/base/monitoring/minio/values-production.yml
+        - https://github.com/muqtadir/loki-microservice/blob/master/base/monitoring/minio/values-performance.yml
   project: monitoring
   syncPolicy:
     automated: {}
