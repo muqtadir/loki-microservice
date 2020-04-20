@@ -8,3 +8,5 @@ data:
 kind: ConfigMap
 metadata:
   name: loki
+  annotations:
+    kustomize.config.k8s.io/behavior: "replace"
