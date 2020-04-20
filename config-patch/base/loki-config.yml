@@ -1,0 +1,156 @@
+apiVersion: v1
+data:
+  config.yaml: |
+    auth_enabled: false
+    chunk_store_config:
+        cache_lookups_older_than: 1h
+        max_look_back_period: 720h
+        chunk_cache_config:
+          redis:
+            endpoint: SephRedisCluster.redis.cache.windows.net:6379
+            password: DGCxQHOtpn4DLvER0m0xFnKAGt1CNWHSPGtR1fSeLZY=
+            timeout: 10s
+            expiration: 0s
+            enable_tls: false
+            max_active_conns: 100
+        write_dedupe_cache_config:
+          redis:
+            endpoint: SephRedisCluster.redis.cache.windows.net:6379
+            password: DGCxQHOtpn4DLvER0m0xFnKAGt1CNWHSPGtR1fSeLZY=
+            timeout: 10s
+            expiration: 0s
+            enable_tls: false
+            max_active_conns: 100
+    distributor:
+        ring:
+            kvstore:
+                consul:
+                    consistentreads: false
+                    host: consul.monitoring.svc.cluster.local:8500
+                    httpclienttimeout: 20s
+                    watchkeyburstsize: 1
+                    watchkeyratelimit: 1
+                store: consul
+    frontend:
+        compress_responses: true
+        max_outstanding_per_tenant: 200
+    frontend_worker:
+        address: query-frontend.monitoring.svc.cluster.local:9095
+        grpc_client_config:
+            max_send_msg_size: 1.048576e+08
+        parallelism: 8
+    ingester:
+        chunk_block_size: 262144
+        chunk_idle_period: 15m
+        lifecycler:
+            heartbeat_period: 5s
+            interface_names:
+              - eth0
+            join_after: 30s
+            num_tokens: 512
+            ring:
+                heartbeat_timeout: 1m
+                kvstore:
+                    consul:
+                        host: consul.monitoring.svc.cluster.local:8500
+                    store: consul
+                replication_factor: 3
+        max_transfer_retries: 60
+    ingester_client:
+        grpc_client_config:
+            max_recv_msg_size: 6.7108864e+07
+        remote_timeout: 1s
+    limits_config:
+        enforce_metric_name: false
+        ingestion_burst_size_mb: 20
+        ingestion_rate_mb: 10
+        ingestion_rate_strategy: global
+        max_global_streams_per_user: 10000
+        max_query_length: 12000h
+        max_query_parallelism: 32
+        max_streams_per_user: 0
+        reject_old_samples: true
+        reject_old_samples_max_age: 168h
+    query_range:
+        cache_results: true
+        max_retries: 5
+
+        # make queries more cache-able by aligning them with their step intervals
+        align_queries_with_step: true
+
+        # parallelize queries in 30min intervals
+        split_queries_by_interval: 30m
+        results_cache:
+            cache:
+              redis:
+                endpoint: SephRedisCluster.redis.cache.windows.net:6379
+                password: DGCxQHOtpn4DLvER0m0xFnKAGt1CNWHSPGtR1fSeLZY=
+                timeout: 10s
+                expiration: 0s
+                enable_tls: false
+                max_active_conns: 100
+            max_freshness: 10m
+    schema_config:
+        configs:
+          - from: "2020-04-14"
+            chunks:
+                period: 720h
+                prefix: monitoring_chunk_
+            index:
+                period: 720h
+                prefix: monitoring_index_
+            object_store: cassandra
+            schema: v11
+            store: cassandra
+    server:
+        graceful_shutdown_timeout: 5s
+        grpc_server_max_concurrent_streams: 1000
+        grpc_server_max_recv_msg_size: 1.048576e+08
+        grpc_server_max_send_msg_size: 1.048576e+08
+        http_listen_port: 3100
+        http_server_idle_timeout: 120s
+        http_server_write_timeout: 1m
+        log_level: debug
+    storage_config:
+        aws:
+            s3: s3://abc:123@s3:4569/loki-test
+            s3forcepathstyle: true
+        cassandra:
+          addresses: sep-eus2-poc-mla-db01.cassandra.cosmos.azure.com
+          port: 10350
+          SSL: true
+          host_verification: false
+          CA_path: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+          keyspace: mla
+          disable_initial_host_lookup: false
+          auth: true
+          username: sep-eus2-poc-mla-db01
+          password: gFCdgU7yfasCEY7nUS2gd1AWphjRh87P7kpeL1LCyjnf0Mg9pAMAsVcPTvrQC1Er9fsq5W4AjgRwq9Vxee01hg==
+          timeout: 40s
+          connect_timeout: 40s
+        index_queries_cache_config:
+          redis:
+            endpoint: SephRedisCluster.redis.cache.windows.net:6379
+            password: DGCxQHOtpn4DLvER0m0xFnKAGt1CNWHSPGtR1fSeLZY=
+            timeout: 10s
+            expiration: 0s
+            enable_tls: false
+            max_active_conns: 100
+    table_manager:
+      retention_deletes_enabled: true
+      retention_period: 720h
+      creation_grace_period: 15m
+
+kind: ConfigMap
+metadata:
+  name: loki
+
+---
+apiVersion: v1
+data:
+  overrides.yaml: |
+    overrides: {}
+kind: ConfigMap
+metadata:
+  name: overrides
+
