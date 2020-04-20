@@ -9,4 +9,4 @@ kind: ConfigMap
 metadata:
   name: loki
   annotations:
-    kustomize.config.k8s.io/behavior: "replace"
+    kustomize.config.k8s.io/behavior: "merge"
