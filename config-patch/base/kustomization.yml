@@ -9,7 +9,7 @@ vars:
 - name: replicationfactor
   objref:
     kind: ConfigMap
-    name: loki-parameters
+    name: loki
     apiVersion: v1
   fieldref:
-    fieldpath: ingester.lifecycler.ring
+    fieldpath: data
