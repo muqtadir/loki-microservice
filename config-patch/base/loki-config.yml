@@ -54,7 +54,7 @@ data:
                     consul:
                         host: consul.monitoring.svc.cluster.local:8500
                     store: consul
-                replication_factor: 3
+                replication_factor: $replicationfactor
         max_transfer_retries: 60
     ingester_client:
         grpc_client_config:
@@ -153,4 +153,3 @@ data:
 kind: ConfigMap
 metadata:
   name: overrides
-
